@@ -65,7 +65,7 @@ def get_admixture_proportions(params):
     # get population labels
     if params.has_key('popfile'):
         handle = open(params['popfile'],'r')
-        populations = [line.strip().split() for line in handle]
+        populations = np.asarray([line.strip().split() for line in handle])
         handle.close()
         population_labels = list(np.unique(populations))
         population_indices = np.array([population_labels.index(pop) for pop in populations])
@@ -139,7 +139,7 @@ if __name__=="__main__":
     # parse command-line options
     argv = sys.argv[1:]
     smallflags = "K:"
-    bigflags = ["input=", "output=", "title="]
+    bigflags = ["input=", "output=", "popfile=", "title="]
     try:
         opts, args = getopt.getopt(argv, smallflags, bigflags)
         if not opts:
